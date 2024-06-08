@@ -10,5 +10,5 @@ app.use('/selling', sellingRouter)
 app.use('/menu', menuRouter)
 
 app.listen(3030, () => {
-    console.log('running on port 300');
+    console.log('running on port 3030');
 })
