@@ -1,24 +1,18 @@
-'use strict';
-const {Model} = require('sequelize');
+const { DataTypes } = require('sequelize')
+const sequelize = require('../database/db')
 
-module.exports = (sequelize, DataTypes) => {
-  class menu extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  }
-  menu.init({
+const Menu = sequelize.define('menus', {
+    // id: {
+    //     type: DataTypes.INTEGER,
+    //     primaryKey: true,
+    //     autoIncrement: true,
+    //     allowNull: false,
+    //   },
     name: DataTypes.STRING,
     description: DataTypes.STRING,
     type: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'menu',
-  });
-  return menu;
-};
+}, { timestamps: true },)
+
+Menu.sync({alter:true})
+
+module.exports = Menu
