@@ -1,11 +1,17 @@
-menu = []
+const Menu = require('../models/menu')
 
 async function get(req, res, next) {
-    res.send(menu)
+    const data = await Menu.findAll()
+    
+    res.json({
+        'status': 'success',
+        'message': 'Data menu',
+        'data': data
+    })
 }
 
 async function create(req, res, next) {
-    menu.push(req.body.name)
+    Menu.create(req.body)
     
     res.json({
         'status': 'success',
@@ -14,7 +20,9 @@ async function create(req, res, next) {
 }
 
 async function remove(req, res, next) {
-    menu = menu.slice(req.params.id)
+    const menu = await Menu.findOne({where: {id: req.params.id}})
+
+    await menu.destroy()
 
     res.json({
         'status': 'success',
